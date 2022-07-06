@@ -9,8 +9,8 @@ SO texture/south_texture.xpm
 EA texture/east_texture.xpm
 
 
-F 220     ,      100,    0
-C 225,30,0
+F 220,100,0
+C 128,223,255
 
                            111
                            1N1

@@ -1,21 +1,21 @@
-NO             texture/path_to_the_north_texture
+NO             texture/north_texture.xpm
 
-WE          texture/path_to_the_west_texture
-
-
-EA                   texture/path_to_the_east_texture
+WE          texture/west_texture.xpm
 
 
+EA                   texture/east_texture.xpm
 
-SO       texture/path_to_the_south_texture
 
 
+SO       texture/south_texture.xpm
 
 
 
 
-F 220, 100,0
-C                   225    ,           30 ,               0
+
+
+F 191, 128, 64
+C 230, 238, 255
 
 
 

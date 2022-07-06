@@ -9,7 +9,7 @@ WE             texture/west_texture.xpm
 
 EA            texture/east_texture.xpm
 F 100       , 100,        100
-C 150     , 150     ,      100
+C 230, 238, 255
 
 11111111111111111111111111111
 10000000001100000000000000001
