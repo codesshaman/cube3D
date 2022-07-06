@@ -38,9 +38,9 @@ static void	init_color(t_game *game, t_data *data)
 	* 256 + data->ceilling->b;
 	game->f_color = (data->floor->r * 256 + data->floor->g) \
 	* 256 + data->floor->b;
-	game->mini_map.p_color = 0x4a0a21;
-	game->mini_map.b_color = 0x0b053d;
-	game->mini_map.e_color = 0x9990e8;
+	game->mini_map.p_color = GREEN;
+	game->mini_map.b_color = BROWN;
+	game->mini_map.e_color = GRAY;
 }
 
 t_game	*init_game(t_data *data)

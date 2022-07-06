@@ -3,20 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drayl <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: jleslee <jleslee@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/13 23:19:08 by drayl             #+#    #+#             */
-/*   Updated: 2021/10/13 23:19:10 by drayl            ###   ########.fr       */
+/*   Created: 2021/10/26 13:08:08 by jleslee           #+#    #+#             */
+/*   Updated: 2021/10/27 16:51:44 by jleslee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+//******************Bonus Part******************//
+
 #include "libft.h"
+
+// Возвращает последний элемент списка
 
 t_list	*ft_lstlast(t_list *lst)
 {
-	if (!lst)
-		return (lst);
-	while (lst->next)
+	if (lst == NULL)
+		return (NULL);
+	while (lst->next != NULL)
 		lst = lst->next;
 	return (lst);
 }

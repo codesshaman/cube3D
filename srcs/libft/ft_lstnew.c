@@ -3,29 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drayl <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: jleslee <jleslee@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/13 23:19:41 by drayl             #+#    #+#             */
-/*   Updated: 2021/10/13 23:19:43 by drayl            ###   ########.fr       */
+/*   Created: 2021/10/26 12:07:26 by jleslee           #+#    #+#             */
+/*   Updated: 2021/10/27 16:53:48 by jleslee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+//******************Bonus Part******************//
+
 #include "libft.h"
 
-t_list	*ft_lstnew(int content)
-{
-	t_list	*new_element;
+// Создаёт новый список
 
-	new_element = (t_list *) malloc(sizeof(t_list));
-	if (!new_element)
-		return (new_element);
-	new_element->value = content;
-	new_element->pot = 0;
-	new_element->bool = 0;
-	new_element->lst_size = 1;
-	new_element->sort_lst = NULL;
-	new_element->next = NULL;
-	new_element->back = NULL;
-	return (new_element);
+t_list	*ft_lstnew(void *content)
+{
+	t_list	*list;
+
+	list = NULL;
+	list = (t_list *)malloc(sizeof(t_list));
+	if (list == NULL)
+		return (NULL);
+	list->content = content;
+	list->next = NULL;
+	return (list);
 }
+
+// list->content = content; - создаём 
+// элемент content со значением content
+// list->next = NULL; - обнуляем следующий 
+//элемент для удобства перечисления (while(lst->next != NULL))

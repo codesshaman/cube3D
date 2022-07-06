@@ -3,45 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drayl <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: jleslee <jleslee@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/13 23:25:19 by drayl             #+#    #+#             */
-/*   Updated: 2021/10/13 23:25:37 by drayl            ###   ########.fr       */
+/*   Created: 2021/10/15 14:54:17 by jleslee           #+#    #+#             */
+/*   Updated: 2021/10/28 13:55:19 by jleslee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+//******************Part II******************//
+
 #include "libft.h"
+// #include <stdio.h>
+// #include "ft_strlen.c"
 
-static size_t	skip_str(const char *str, size_t len)
+// Создаёт подстроку строки s
+// Начиная с start длинной len
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t	i;
+	size_t	size;
+	char	*sub;
 
-	i = 0;
-	while (str[i] && i < len)
-		i++;
-	return (i);
+	if (s == NULL)
+		return (NULL);
+	if ((unsigned int)ft_strlen(s) < start)
+		return (ft_strdup(""));
+	size = ft_strlen(s + start);
+	if (size < len)
+		len = size;
+	sub = NULL;
+	sub = (char *)malloc(sizeof(char) * (len + 1));
+	if (sub == NULL)
+		return (NULL);
+	ft_strlcpy(sub, s + start, len + 1);
+	return (sub);
 }
 
-char	*ft_substr(const char *s, unsigned int start, size_t len)
-{
-	size_t	i;
-	char	*str;
-
-	if (!s)
-		return ((char *)(void *)0);
-	if (start != skip_str(s, start))
-		len = 0;
-	len = skip_str(&s[start], len);
-	str = (char *) malloc((len + 1) * sizeof(char));
-	if (!str)
-		return (str);
-	i = 0;
-	while (i < len)
-	{
-		str[i] = s[start + i];
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
-}
+// int main(void){
+// 	printf("%s", ft_substr("abcdefgkl", 0, (size_t)3));
+// 	printf("%c", '\n');
+// 	printf("%s", ft_substr("abcdefgkl", 3, (size_t)3));
+// 	printf("%c", '\n');
+// 	printf("%s", ft_substr("abcdefgkl", 6, (size_t)3));
+// 	printf("%c", '\n');
+// 	printf("%s", ft_substr("abcdefgkl", 9, (size_t)3));
+// 	return (0);
+// }

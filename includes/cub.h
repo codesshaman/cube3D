@@ -12,6 +12,11 @@
 
 #ifndef CUB_H
 # define CUB_H
+
+# define BROWN 0x7d4712
+# define GRAY 0x9da096
+# define GREEN 0x1ab443
+
 # include "../srcs/libft/libft.h"
 # include "../srcs/mlx/mlx.h"
 //#include <mlx.h>

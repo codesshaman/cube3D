@@ -3,31 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drayl <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: jleslee <jleslee@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/13 23:16:31 by drayl             #+#    #+#             */
-/*   Updated: 2021/10/13 23:16:43 by drayl            ###   ########.fr       */
+/*   Created: 2021/10/26 13:10:45 by jleslee           #+#    #+#             */
+/*   Updated: 2021/10/26 13:23:32 by jleslee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+//******************Bonus Part******************//
+
 #include "libft.h"
+
+// Добавляет элемент к концу списка
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	if (!lst || !*lst)
+	t_list	*last;
+
+	if (!lst)
+		return ;
+	last = *lst;
+	if (!last)
+	{
 		*lst = new;
-	else if (!(*lst)->back)
-	{
-		(*lst)->back = new;
-		(*lst)->next = new;
-		new->next = *lst;
-		new->back = *lst;
+		return ;
 	}
-	else
-	{
-		new->next = *lst;
-		new->back = (*lst)->back;
-		(*lst)->back->next = new;
-		(*lst)->back = new;
-	}
+	while (last->next)
+		last = last->next;
+	last->next = new;
 }

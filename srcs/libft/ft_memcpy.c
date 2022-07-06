@@ -3,28 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drayl <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: jleslee <jleslee@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/13 23:20:45 by drayl             #+#    #+#             */
-/*   Updated: 2021/10/13 23:20:47 by drayl            ###   ########.fr       */
+/*   Created: 2021/10/10 19:29:41 by jleslee           #+#    #+#             */
+/*   Updated: 2021/10/26 21:17:51 by jleslee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+//******************Part I******************//
+
 #include "libft.h"
+//#include <stdio.h>
 
-void	*ft_memcpy(void *s1, const void *s2, size_t n)
+// Копирует n бит из src в dest
+
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	void	*s;
+	unsigned char	*new_dest;
+	unsigned char	*new_src;
+	size_t			i;
 
-	if (!s1 && !s2)
-		return (s1);
-	s = s1;
-	while ((n > 0))
-	{
-		*(char *)s1 = *(char *)s2;
-		s1++;
-		s2++;
-		n--;
-	}
-	return (s);
+	if (!dest && !src)
+		return (0);
+	new_dest = dest;
+	new_src = (unsigned char *)src;
+	i = 0;
+	while (i++ < n)
+		*new_dest++ = *new_src++;
+	return (dest);
 }
+
+// int main(int argc, char *argv[]){
+// 	if(argc > 0){
+// 		char src[7] = "src_str";
+// 		char dst[7] = "dst_str";
+// 		ft_memcpy(dst, src, (size_t)3);
+// 		printf("%s", dst);
+// 		printf("%c", '\n');
+// 	}
+// 	return (0);
+// }

@@ -3,95 +3,139 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drayl <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: jleslee <jleslee@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/13 23:22:14 by drayl             #+#    #+#             */
-/*   Updated: 2021/10/13 23:22:17 by drayl            ###   ########.fr       */
+/*   Created: 2021/10/16 10:46:31 by jleslee           #+#    #+#             */
+/*   Updated: 2021/10/26 21:20:29 by jleslee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "libft.h"
+//******************Part II******************//
 
-static int	get_mass_size(char const *s, char c)
+#include "libft.h"
+// #include <stdio.h>
+
+// Разбитие строки *s на
+// Массивы по символу c
+
+// Отлавливаем утечки памяти
+
+void	*leak_hunter(char **arr, int words_len)
 {
 	int	i;
 
 	i = 0;
-	while (*s)
+	if (words_len > 0)
 	{
-		if (*s == c)
-			s++;
-		else
+		while (i < words_len)
 		{
+			free(arr[i]);
 			i++;
-			while (*s && *s != c)
-				s++;
 		}
 	}
-	return (i + 1);
-}
-
-static int	get_len(char const *s, char c)
-{
-	int	len;
-
-	len = 0;
-	while (s[len] && s[len] != c)
-		len++;
-	return (len + 1);
-}
-
-static char	**clear(char **mass)
-{
-	int	i;
-
-	i = -1;
-	while (mass[++i])
-		free(mass[i]);
-	free(mass);
+	free(arr);
 	return (NULL);
 }
 
-static int	add_word(char *word, char const *s, char c)
+// Подсчитываем общую длинну символов
+
+int	sym_len(char const *str, char c)
 {
-	int	i;
+	int		i;
 
 	i = 0;
-	while (s[i] && s[i] != c)
-	{
-		word[i] = s[i];
+	while (str[i] && str[i] != c)
 		i++;
-	}
-	word[i] = '\0';
 	return (i);
 }
 
-char	**ft_split(const char *s, char c)
+// Подсчитываем количество слов
+
+int	words_counter(char const *str, char c)
 {
 	int		i;
-	int		k;
-	char	**words;
+	int		counter;
 
-	if (!s)
-		return (NULL);
-	words = (char **) malloc(get_mass_size(s, c) * sizeof(char *));
-	if (words == (NULL))
-		return (words);
+	if (!str)
+		return (0);
 	i = 0;
-	k = 0;
-	while (s[i])
+	counter = 0;
+	while (str[i])
 	{
-		if (s[i] == c)
-			i++;
-		else
-		{
-			words[k] = (char *)malloc(get_len(&s[i], c) * sizeof(char));
-			if (words[k] == (char *)(void *)0)
-				return (clear(words));
-			i += add_word(words[k++], &s[i], c);
-		}
+		if (str[i] != c && (str[i + 1] == c || !(str[i + 1])))
+			counter++;
+		i++;
 	}
-	words[k] = (char *)(void *)0;
-	return (words);
+	return (counter);
 }
+
+// Создаём слова и заполняем ими массив
+
+char	**words_maker(char const *str, char **arr, char c, int words)
+{
+	int		i;
+	int		j;
+	int		len;
+
+	i = 0;
+	while (i < words)
+	{
+		while (*str == c)
+			str++;
+		len = sym_len(str, c);
+		arr[i] = NULL;
+		arr[i] = (char *)malloc(sizeof(char) * (len + 1));
+		if (arr[i] == NULL)
+			return (leak_hunter(arr, i));
+		j = 0;
+		while (j < len)
+			arr[i][j++] = *str++;
+		arr[i][j] = '\0';
+		i++;
+	}
+	arr[i] = NULL;
+	return (arr);
+}
+
+char	**ft_split(char	const *s, char c)
+{
+	char	**arr;
+	int		words;
+
+	if (!s && !c)
+		return (NULL);
+	words = 0;
+	if (c == '\0' && !s)
+		return (0);
+	words = words_counter(s, c);
+	arr = NULL;
+	arr = (char **)malloc(sizeof(char *) * (words + 1));
+	if (arr == NULL)
+		return (NULL);
+	return (words_maker(s, arr, c, words));
+}
+
+// int				main(void)
+// {
+// 	char	**arr;
+// 	unsigned int	i;
+
+// 	i = 0;
+// 	arr = ft_split("  Hello foo bar   baz ", ' ');
+// 	while (arr[i] != NULL)
+// 	{
+// 		printf("%s", arr[i]);
+//         printf("%c", '\n');
+// 		i++;
+// 	}
+// 	i = 0;
+// 	arr = ft_split("\0aa\0bbb", '\0');
+// 	if (arr == 0)
+// 		printf("%s\n", "null");
+// 	while (arr[i] != NULL)
+// 	{
+// 		printf("%s", arr[i]);
+//         printf("%c", '\n');
+// 		i++;
+// 	}
+// }

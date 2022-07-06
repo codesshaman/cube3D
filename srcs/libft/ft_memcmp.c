@@ -3,24 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drayl <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: jleslee <jleslee@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/13 23:20:33 by drayl             #+#    #+#             */
-/*   Updated: 2021/10/13 23:20:36 by drayl            ###   ########.fr       */
+/*   Created: 2021/10/11 22:52:21 by jleslee           #+#    #+#             */
+/*   Updated: 2021/10/26 21:17:08 by jleslee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+//******************Part I******************//
 
-int	ft_memcmp(const void *str1, const void *str2, size_t n)
+#include "libft.h"
+//#include <stdio.h>
+
+// Сравнение двух массивов посимвольно
+// 0 если массивы идентичны
+// 1 если первый отличный бит больше,
+// -1 если первый отличный бит меньше
+
+int	ft_memcmp(const void *arr1, const void *arr2, size_t n)
 {
-	while (n > 1 && *(unsigned char *)str1 == *(unsigned char *)str2)
+	int				i;
+	unsigned char	*b1;
+	unsigned char	*b2;
+
+	i = 0;
+	b1 = (unsigned char *)arr1;
+	b2 = (unsigned char *)arr2;
+	while (n--)
 	{
-		str1++;
-		str2++;
-		n--;
+		if (b1[i] != b2[i])
+			return (b1[i] - b2[i]);
+		i++;
 	}
-	if (n == 0)
-		return (0);
-	return (*((unsigned char *)str1) - *((unsigned char *)str2));
+	return (0);
 }
+
+// int main(int argc, char *argv[]){
+// 	if(argc > 0){
+// 		printf("%d", ft_memcmp("abcdf", "abcde", (size_t)5));
+// 		printf("%c", '\n');
+// 		printf("%d", ft_memcmp("abcde", "abcde", (size_t)5));
+// 		printf("%c", '\n');
+// 		printf("%d", ft_memcmp("abcde", "abcdf", (size_t)5));
+// 		printf("%c", '\n');
+// 	}
+// 	return (0);
+// }

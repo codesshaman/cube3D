@@ -3,32 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drayl <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: jleslee <jleslee@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/13 23:22:35 by drayl             #+#    #+#             */
-/*   Updated: 2021/10/13 23:22:37 by drayl            ###   ########.fr       */
+/*   Created: 2021/10/15 11:29:09 by jleslee           #+#    #+#             */
+/*   Updated: 2021/10/28 13:29:44 by jleslee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+//******************Part I******************//
+
 #include "libft.h"
+// #include <stdio.h>
+// #include "ft_strlen.c"
+// #include "ft_memcpy.c"
 
-char	*ft_strdup(const char *s1)
+// Дублирует строку str, выделяя
+// Под неё память malloc-ом и
+// -- Очищая с помощью free
+
+char	*ft_strdup(const char *str)
 {
-	size_t	i;
-	char	*str;
+	size_t	n;
+	char	*res;
 
-	i = 0;
-	while (s1[i])
-		i++;
-	str = (char *) malloc((i + 1) * sizeof(char));
-	if (!str)
-		return (str);
-	while (i > 0)
-	{
-		str[i] = s1[i];
-		i--;
-	}
-	str[i] = s1[i];
-	return (str);
+	n = (size_t)(ft_strlen(str) + 1);
+	res = NULL;
+	res = (char *)malloc(n);
+	if (res == NULL)
+		return (0);
+	ft_memcpy(res, str, n);
+	return (res);
 }
+
+// int main(int argc, char *argv[]){
+// 	if(argc > 0){
+// 		char str[7] = "abcdefg";
+// 		printf("%s", ft_strdup(str));
+// 		printf("%c", '\n');
+// 	}
+// 	return (0);
+// }

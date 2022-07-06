@@ -3,25 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drayl <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: jleslee <jleslee@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/13 23:24:12 by drayl             #+#    #+#             */
-/*   Updated: 2021/10/13 23:24:14 by drayl            ###   ########.fr       */
+/*   Created: 2021/10/11 22:38:21 by jleslee           #+#    #+#             */
+/*   Updated: 2021/10/27 21:29:11 by jleslee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+//******************Part I******************//
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+#include "libft.h"
+// #include <stdio.h>
+// #include "ft_strlen.c"
+
+// Сравнение двух строк с ограничением
+// Количества сравниваемых символов (от
+// 0 до n), 0 если разницы нет, -1 если
+// отличный бит меньше, 1 если больше.
+
+int	ft_strncmp(const char *arr1, const char *arr2, size_t n)
 {
-	if (!n)
-		return (0);
-	while (*s1 && *s2 && n > 1
-		&& *(unsigned char *)s1 == *(unsigned char *)s2)
+	size_t			i;
+	unsigned char	*b1;
+	unsigned char	*b2;
+
+	i = 0;
+	b1 = (unsigned char *)arr1;
+	b2 = (unsigned char *)arr2;
+	while ((b1[i] || b2[i]) && i < n)
 	{
-		s1++;
-		s2++;
-		n--;
+		if (b1[i] != b2[i])
+			return (b1[i] - b2[i]);
+		i++;
 	}
-	return (*(unsigned char *)s1 - *(unsigned char *)s2);
+	return (0);
 }
+
+// int main(int argc, char *argv[]){
+// 	if(argc > 0){
+// 		char dst[] = "asbdfb";
+// 		char src[] = "abcdef";
+// 		int n = ft_strncmp(dst, src, (size_t)3);
+// 		printf("%d", n);
+// 		printf("%c", '\n');
+// 		printf("%s", dst);
+// 		printf("%c", '\n');
+// 	}
+// 	return (0);
+// }

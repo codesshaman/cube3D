@@ -17,7 +17,6 @@
 # define FALSE 0
 # define EQUAL 0
 
-# define BUFFER_SIZE 1024
 # define SIDE_LEN 3
 # define SURFACE_LEN 2
 # define TEXTURE_COUNT 4

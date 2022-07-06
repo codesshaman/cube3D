@@ -3,26 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drayl <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: jleslee <jleslee@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/13 23:20:20 by drayl             #+#    #+#             */
-/*   Updated: 2021/10/13 23:20:22 by drayl            ###   ########.fr       */
+/*   Created: 2021/10/26 13:01:18 by jleslee           #+#    #+#             */
+/*   Updated: 2021/10/26 13:10:17 by jleslee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+//******************Bonus Part******************//
+
 #include "libft.h"
+
+// Подсчёт всех элементов списка (длинны списка)
 
 int	ft_lstsize(t_list *lst)
 {
-	int	size;
+	int	i;
 
-	if (!lst)
-		return (0);
-	size = 1;
-	while (lst->next)
+	i = 0;
+	while (lst != NULL)
 	{
 		lst = lst->next;
-		size++;
+		i++;
 	}
-	return (size);
+	return (i);
 }

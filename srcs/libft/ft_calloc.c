@@ -3,26 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drayl <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: jleslee <jleslee@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/13 23:14:44 by drayl             #+#    #+#             */
-/*   Updated: 2021/10/13 23:14:51 by drayl            ###   ########.fr       */
+/*   Created: 2021/10/12 20:29:42 by jleslee           #+#    #+#             */
+/*   Updated: 2021/10/26 20:58:30 by jleslee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+//******************Part I******************//
+
 #include "libft.h"
+//#include <stdio.h>
+//#include "ft_memset.c"
 
-void	*ft_calloc(size_t count, size_t size)
+// Выделяем malloc-ом память
+// И заполняем её нулями
+
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	char			*str;
-	unsigned int	i;
+	void	*mem;
 
-	str = (char *) malloc(count * size);
-	if (!str)
-		return (str);
-	i = 0;
-	while (i < count * size)
-		str[i++] = '\0';
-	return ((void *) str);
+	mem = NULL;
+	mem = malloc(nmemb * size);
+	if (mem == NULL)
+		return (NULL);
+	ft_bzero(mem, (nmemb * size));
+	return (mem);
 }
+
+// int main(int argc, char *argv[]){
+// 	if(argc > 0){
+// 		printf("%s", ft_calloc((size_t)4, (size_t)8));
+// 		printf("%c", '\n');
+// 	}
+// 	return (0);
+// }

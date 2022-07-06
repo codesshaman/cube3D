@@ -3,25 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drayl <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: jleslee <jleslee@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/13 23:22:48 by drayl             #+#    #+#             */
-/*   Updated: 2021/10/13 23:22:51 by drayl            ###   ########.fr       */
+/*   Created: 2021/10/25 22:19:22 by jleslee           #+#    #+#             */
+/*   Updated: 2021/10/26 12:19:11 by jleslee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+//******************Part II******************//
+
+// Применяет функцию f к каждому символу строки, 
+// передаваемой в качестве аргумента, и передает 
+// её индекс в качестве первого аргумента. 
+
 #include "libft.h"
 
-void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+char	*ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	unsigned int	i;
+	int	i;
 
-	if (!s)
-		return ;
 	i = 0;
+	if (!s || !f)
+		return (NULL);
 	while (s[i])
 	{
-		f(i, &s[i]);
+		f(i, s + i);
 		i++;
 	}
+	return (s);
 }

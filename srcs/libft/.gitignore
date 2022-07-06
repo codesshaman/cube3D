@@ -1,0 +1,8 @@
+.vscode
+.vscode/launch.json
+.vscode/tasks.json
+a.exe
+a.out
+glog -n 5
+communications
+test.py

@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jleslee <jleslee@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/10 09:42:09 by jleslee           #+#    #+#             */
-/*   Updated: 2021/10/26 21:03:09 by jleslee          ###   ########.fr       */
+/*   Created: 2021/10/26 13:56:44 by jleslee           #+#    #+#             */
+/*   Updated: 2021/10/26 13:59:34 by jleslee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//******************Part I******************//
+//******************Bonus Part******************//
 
 #include "libft.h"
-//#include <stdio.h>
 
-// Возвращаем 1, если передано
-// Число, иначе возвращаем 0
+// Последовательно итерирует список, применяя
+// Функцию f к каждому его элементу
 
-int	ft_isdigit(int c)
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	if (c >= 48 && c <= 57)
-		return (1);
-	return (0);
+	if (lst == NULL || f == NULL)
+		return ;
+	while (lst)
+	{
+		f(lst->content);
+		lst = lst->next;
+	}
 }
-
-// int main(int argc, char *argv[]){
-// 	if(argc > 0){
-// 		int i = '0';
-// 		printf("%d", ft_isdigit(i));
-// 		printf("%c", '\n');
-// 	}
-// 	return (0);
-// }

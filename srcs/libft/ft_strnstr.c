@@ -3,31 +3,57 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drayl <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: jleslee <jleslee@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/13 23:24:24 by drayl             #+#    #+#             */
-/*   Updated: 2021/10/13 23:24:26 by drayl            ###   ########.fr       */
+/*   Created: 2021/10/12 13:06:37 by jleslee           #+#    #+#             */
+/*   Updated: 2021/10/27 21:42:27 by jleslee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+//******************Part I******************//
+
 #include "libft.h"
+// #include <stdio.h>
+// #include "ft_strlen.c"
+// #include "ft_memcmp.c"
 
-char	*ft_strnstr(const char *str1, const char *str2, size_t len)
+// Находит первое вхождение (первый бит)
+// Строки little внутри строки big или
+// Возвращает NULL при остутствии строки
+
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	size_t	i;
-	size_t	j;
+	size_t	lit_len;
+	size_t	big_len;
+	size_t	size;
 
-	i = 0;
-	if (*str2 == '\0' || str1 == str2 || (len == 1 && *str1 == *str2))
-		return ((char *)str1);
-	while (str1[i] && len--)
+	if (*little == '\0')
+		return ((char *)big);
+	lit_len = ft_strlen(little);
+	big_len = ft_strlen(big);
+	if (big_len < lit_len || len < lit_len)
+		return (0);
+	if (big_len > len)
+		size = len;
+	else
+		size = big_len;
+	while (size-- >= lit_len)
 	{
-		j = 0;
-		while (str1[i + j] && len >= j && str1[i + j] == str2[j])
-			j++;
-		if (str2[j] == '\0')
-			return ((char *)(str1 + i));
-		i++;
+		if (ft_memcmp(big, little, lit_len) == 0)
+			return ((char *)big);
+		big++;
 	}
-	return ((char *)0);
+	return (0);
 }
+
+// int main(int argc, char *argv[]){
+// 	if(argc > 0){
+// 		printf("%d", ft_strnstr("abcdfg", "fg", (size_t)6));
+// 		printf("%c", '\n');
+// 		printf("%d", ft_strnstr("babcd", "c", (size_t)3));
+// 		printf("%c", '\n');
+// 		printf("%d", ft_strnstr("abcde", "d", (size_t)6));
+// 		printf("%c", '\n');
+// 	}
+// 	return (0);
+// }

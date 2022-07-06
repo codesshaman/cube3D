@@ -3,50 +3,78 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: drayl <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: jleslee <jleslee@student.21-school.ru>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/13 23:16:12 by drayl             #+#    #+#             */
-/*   Updated: 2021/10/13 23:16:19 by drayl            ###   ########.fr       */
+/*   Created: 2021/10/25 11:17:43 by jleslee           #+#    #+#             */
+/*   Updated: 2021/10/26 21:11:48 by jleslee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+//******************Part II******************//
+
+// Переводит int в ascii (число в строку)
+
 #include "libft.h"
 
-static int	len_num(int n)
+static int	ft_itoa_size(long nbr)
 {
-	int	i;
+	int		size;
 
-	i = 0;
-	if (n <= 0)
-		i++;
-	while (n)
+	size = 1;
+	if (nbr < 0)
+		size++;
+	while (nbr / 10 != 0)
 	{
-		n /= 10;
-		i++;
+		nbr /= 10;
+		size++;
 	}
-	return (i);
+	return (size);
+}
+
+static void	ft_itoa_fill(char *sptr, int *index, long nbr)
+{
+	if (nbr >= 10)
+	{
+		ft_itoa_fill(sptr, index, nbr / 10);
+		ft_itoa_fill(sptr, index, nbr % 10);
+	}
+	else
+	{
+		sptr[*index] = nbr + '0';
+		(*index)++;
+	}
 }
 
 char	*ft_itoa(int n)
 {
-	char	*str;
-	int		size;
-	int		z;
+	char	*sptr;
+	int		index;
+	long	nbr;
 
-	z = (n < 0);
-	size = len_num(n);
-	str = (char *) malloc((size + 1) * sizeof(char));
-	if (!str)
-		return (str);
-	if (z)
-		str[0] = '-';
-	str[size--] = '\0';
-	while (size > (0 - !z))
+	nbr = n;
+	sptr = (char *) ft_calloc(ft_itoa_size(nbr) + 1, 1);
+	if (!sptr)
+		return (NULL);
+	index = 0;
+	if (nbr < 0)
 	{
-		str[size] = (char)(48 + (n % 10) * (!z * 2 - 1));
-		n /= 10;
-		size--;
+		sptr[index++] = '-';
+		nbr *= -1;
 	}
-	return (str);
+	ft_itoa_fill(sptr, &index, nbr);
+	sptr[index] = 0;
+	return (sptr);
 }
+
+//#include <stdio.h>
+// int main(void){
+//     printf("%s", ft_itoa(68));
+//     printf("%c", '\n');
+//     printf("%s", ft_itoa(0));
+//     printf("%c", '\n');
+// 	printf("%s", ft_itoa(2147483647));
+//     printf("%c", '\n');
+//     printf("%s", ft_itoa(-2147483648));
+//     printf("%c", '\n');
+//     return (0);
+// }
