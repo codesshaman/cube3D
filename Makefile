@@ -12,11 +12,11 @@ CFLAGS	=	-Wall -Wextra -Werror
 
 HEADER	=	$(addprefix includes/, constants.h cub.h strings.h structs.h)
 
-FILES	=	$(addprefix parser/, check_id.c check_valid_map.c convert_line_to_data.c		\
-						convert_line_to_map.c create_data.c create_map.c get_index.c 		\
-						get_subline.c parse.c put_error.c read_file.c up_atoi.c				\
+FILES	=	$(addprefix parser/, check_id.c check_valid_map.c convert_line_to_data.c \
+						convert_line_to_map.c create_data.c create_map.c get_index.c \
+						get_subline.c parse.c put_error.c read_file.c up_atoi.c	\
 						validation_check.c)													\
-			$(addprefix mlx_utils/, init_mlx.c draw.c draw_mini_map.c)						\
+			$(addprefix mlx_utils/, init_mlx.c draw.c draw_mini_map.c) \
 			$(addprefix game/, init_game.c exit.c action.c recasting.c)
 
 SRCS	=	$(addprefix ${SRC_DIR}/, main.c ${FILES})
